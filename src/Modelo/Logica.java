@@ -66,18 +66,19 @@ public class Logica {
                                 break;
                             case 3: Ingresodatos.registerMateria();
                                 break;
-                            case 4: //Ingresodatos.registerSecretary();
+                            case 4: Ingresodatos.registerEstudent();
                                 break; 
-                            case 5: // Ingresodatos.registerJanitor();
+                            case 5: // Ingresodatos.registerSecretary();
                                 break;
-                                case 6:
+                            case 6: //Ingresodatos.registerJanitor();
+                                case 7:
                                     Cadena.saltolinea(3);
                                     System.out.println("\t\033[31mSESION CERRARA!!");
                                     Cadena.saltolinea(3);
                                     break;
                             default: Ingresodatos.error();    
                         }
-        } while (opcion!=6);
+        } while (opcion!=7);
         Cadena.saltolinea(2);
     }
     public static void iniciarSistemaProfesor(){
@@ -90,10 +91,11 @@ public class Logica {
     public static void iniciarSistemaEstudiante(int idestudiante){
         //System.out.println("el id del estudiante: "+idestudiante);
         int opcion;
-        Ingresodatos.textoSistemaEstudiante();
-        opcion = Cadena.leerentero();
-        Cadena.saltolinea(1);
-        do {            
+        
+        do {    
+            Ingresodatos.textoSistemaEstudiante();
+            opcion = Cadena.leerentero();
+            Cadena.saltolinea(1);
              switch(opcion){
                             case 1: Ingresodatos.verNotasEstudiante(idestudiante);
                                 break;
@@ -101,7 +103,7 @@ public class Logica {
                                     System.out.println("\t\033[31mSESION CERRARA!!");
                                     Cadena.saltolinea(3);
                                     break;
-                            default: Ingresodatos.error();    
+                            default: Ingresodatos.error(); break;   
                         }
         } while (opcion!=2);
     }
