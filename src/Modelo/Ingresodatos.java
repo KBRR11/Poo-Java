@@ -223,7 +223,7 @@ public class Ingresodatos {
                     System.out.println("\tNro\tEstudiante\tMateria\tCarrera\tProfesor");
                     int num=0;
                     for (Estudiante_Materia estumat : estud_mater) {
-                        if (estumat.getIdestudiante()==estudiante.get(contEstudiante-1).getIdpersona()) {
+                        if (estumat.getIdestudiante()==estudiante.get(estumat.getIdestudiante()-1).getIdpersona() /*|| estumat.getIdmateria()==materia.get(estumat.getIdmateria()-1).getIdmateria()*/) {
                             num++;
                             System.out.println("\t"+num+"\t"+estudiante.get(contEstudiante-1).getNombre()+" "+estudiante.get(contEstudiante-1).getApellido()+"\t"
                                     +materia.get(estu_mat.getIdmateria()-1).getNom_materia()+"\t"+carrera.get(materia.get(estu_mat.getIdmateria()-1).getIdcarrera()-1).getNom_carrera()+
@@ -390,7 +390,16 @@ public class Ingresodatos {
             respuesta = Cadena.leerentero();
         } while (respuesta!=0);
     }
-    
+    public static void calificar(){
+        Cadena.saltolinea(2);
+        System.out.println("\tCalificar Estudiantes de la Carrera de: ?");
+        Cadena.saltolinea(1);
+        for (Profesor_Carrera procar : prof_carr) {
+            if (procar.getIdcarrera()==carrera.get(procar.getIdcarrera()-1).getIdcarrera()) {
+                System.out.println(carrera.get(procar.getIdcarrera()-1).getIdcarrera()+" "+carrera.get(procar.getIdcarrera()-1).getNom_carrera());
+            }
+        }
+    }
     public static void verNotasEstudiante(int idpersona){
         int idcarrera=estudiante.get(idpersona-1).getIdcarrera();
         String nomcarrera = carrera.get(idcarrera-1).getNom_carrera();
@@ -426,13 +435,33 @@ public class Ingresodatos {
                 System.out.println(pos);
                 Logica.iniciarSistemaEstudiante(pos);
             }else{
-                Cadena.saltolinea(2);
+             int pos2 =0;
+                System.out.println("Buscando en Profesor");
+                for (Profesor profes : profesor) {
+                    
+                   pos2++;
+                    if (profes.getCedula().equals(cedula) || profes.getPassword().equals(password)) {
+                        loginCorrecto=true;
+                        System.out.println(profes.getNombre()+" obtenido en la posicion: "+pos2);
+                         break;
+                    }else{
+                        System.out.println("no encontrado");
+                        loginCorrecto=false;
+                        break;
+                    }
+                }
+                if (loginCorrecto) {
+                System.out.println(pos2);
+                Logica.iniciarSistemaProfesor(pos2);
+            }else{
+                  Cadena.saltolinea(2);
                 System.out.println("\t\033[31m---------------------");
                 System.out.println("\t\033[31mUSUARIO NO ENCONTRADO");
                 System.out.println("\t\033[31mIntente de nuevo!!");
                 System.out.println("\t\033[31m---------------------");
                 Cadena.saltolinea(2);
-                Login();
+                Login();  
+                }
             }
             
             

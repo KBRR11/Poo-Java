@@ -81,11 +81,23 @@ public class Logica {
         } while (opcion!=7);
         Cadena.saltolinea(2);
     }
-    public static void iniciarSistemaProfesor(){
+    public static void iniciarSistemaProfesor(int idprofesor){
         int opcion;
         do {            
-            //validacion login
-        } while (true);
+            Ingresodatos.textoSistemaProfesor();
+            opcion = Cadena.leerentero();
+            Cadena.saltolinea(1);
+            switch(opcion){
+                case 1: Ingresodatos.calificar();
+                    break;
+                case 2:
+                    break;
+                case 3: Cadena.saltolinea(3);
+                        System.out.println("\t\033[31mSESION CERRARA!!");
+                        Cadena.saltolinea(3);
+                    break;
+        }
+        } while (opcion!=3);
     }
     
     public static void iniciarSistemaEstudiante(int idestudiante){
