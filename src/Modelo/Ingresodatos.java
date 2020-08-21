@@ -20,6 +20,7 @@ public class Ingresodatos {
     private static ArrayList<Profesor> profesor = new ArrayList();
     private static ArrayList<Materia> materia = new ArrayList(); 
     private static ArrayList<Estudiante_Materia> estud_mater = new ArrayList();
+    private static ArrayList<Calificacion> calificacion = new ArrayList();
     
     private static int contCarrera = 0;
     private static int contProfesor = 0;
@@ -102,6 +103,15 @@ public class Ingresodatos {
         System.out.println("\t[1]. Ver Notas");
         System.out.println("\t[2]. Cerrar Sesión");
         System.out.print("\tIngresar Opción [1-2]: ");
+    }
+    public static void textoSistemaProfesor(){
+        Cadena.saltolinea(3);
+        System.out.println("\t\t\033[34mBienvenido Profesor");
+        Cadena.saltolinea(1);
+        System.out.println("\t[1]. Calificar estudiantes");
+        System.out.println("\t[2]. Corregir Calificación");
+        System.out.println("\t[3]. Cerrar Sesión");
+        System.out.print("\tIngresar Opción [1-3]: ");
     }
     public static void Login(){
         String cedula;
@@ -218,9 +228,7 @@ public class Ingresodatos {
                             System.out.println("\t"+num+"\t"+estudiante.get(contEstudiante-1).getNombre()+" "+estudiante.get(contEstudiante-1).getApellido()+"\t"
                                     +materia.get(estu_mat.getIdmateria()-1).getNom_materia()+"\t"+carrera.get(materia.get(estu_mat.getIdmateria()-1).getIdcarrera()-1).getNom_carrera()+
                                     "\t"+profesor.get(materia.get(estu_mat.getIdmateria()-1).getIdprofesor()-1).getNombre()+" "+profesor.get(materia.get(estu_mat.getIdmateria()-1).getIdprofesor()-1).getApellido());
-                            System.out.println("exite");
-                        }else{
-                            System.out.println("no existe");
+                            //System.out.println("exite");
                         }
                            //System.out.println("\t"+num+"\t"+estudiante.get(estumat.getIdestudiante()-1).getNombre()+" "+estudiante.get(estumat.getIdestudiante()-1).getApellido()+"\t"+materia.get(estumat.getIdmateria()-1).getNom_materia());
                     }
