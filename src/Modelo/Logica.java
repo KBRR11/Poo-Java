@@ -37,7 +37,9 @@ public class Logica {
                             case 3: //Ingresodatos.registerSecretary();
                                 break;
                             case 4: //Ingresodatos.registerJanitor();
-                                break;    
+                                break;   
+                            case 5:
+                                break;
                             default: Ingresodatos.error();    
                         }
                     } while (opcRegistro!=5);
@@ -62,7 +64,7 @@ public class Logica {
                                 break;
                             case 2: Ingresodatos.registerTeacher();
                                 break;
-                            case 3: //Ingresodatos.registerMateria();
+                            case 3: Ingresodatos.registerMateria();
                                 break;
                             case 4: //Ingresodatos.registerSecretary();
                                 break; 
@@ -83,6 +85,25 @@ public class Logica {
         do {            
             //validacion login
         } while (true);
+    }
+    
+    public static void iniciarSistemaEstudiante(int idestudiante){
+        //System.out.println("el id del estudiante: "+idestudiante);
+        int opcion;
+        Ingresodatos.textoSistemaEstudiante();
+        opcion = Cadena.leerentero();
+        Cadena.saltolinea(1);
+        do {            
+             switch(opcion){
+                            case 1: Ingresodatos.verNotasEstudiante(idestudiante);
+                                break;
+                            case 2: Cadena.saltolinea(3);
+                                    System.out.println("\t\033[31mSESION CERRARA!!");
+                                    Cadena.saltolinea(3);
+                                    break;
+                            default: Ingresodatos.error();    
+                        }
+        } while (opcion!=2);
     }
     
 }

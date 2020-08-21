@@ -11,6 +11,7 @@ package Modelo;
  */
 public class Materia {
     private int idmateria;
+    private String nom_materia;
     private String codigo;
     private String Semestre;
     private int idcarrera;
@@ -19,8 +20,9 @@ public class Materia {
     public Materia() {
     }
 
-    public Materia(int idmateria, String codigo, String Semestre, int idcarrera, int idprofesor) {
+    public Materia(int idmateria, String nom_materia, String codigo, String Semestre, int idcarrera, int idprofesor) {
         this.idmateria = idmateria;
+        this.nom_materia = nom_materia;
         this.codigo = codigo;
         this.Semestre = Semestre;
         this.idcarrera = idcarrera;
@@ -33,6 +35,14 @@ public class Materia {
 
     public void setIdmateria(int idmateria) {
         this.idmateria = idmateria;
+    }
+
+    public String getNom_materia() {
+        return nom_materia;
+    }
+
+    public void setNom_materia(String nom_materia) {
+        this.nom_materia = nom_materia;
     }
 
     public String getCodigo() {
@@ -66,6 +76,8 @@ public class Materia {
     public void setIdprofesor(int idprofesor) {
         this.idprofesor = idprofesor;
     }
+
+    
     
     
 }
