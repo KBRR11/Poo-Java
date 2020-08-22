@@ -20,7 +20,7 @@ public class Ingresodatos {
     private static ArrayList<Profesor> profesor = new ArrayList();
     private static ArrayList<Materia> materia = new ArrayList(); 
     private static ArrayList<Estudiante_Materia> estud_mater = new ArrayList();
-    private static ArrayList<Calificacion> calificacion = new ArrayList();
+    private static ArrayList<Calificacion> calificacion = new ArrayList<>();
     
     private static int contCarrera = 0;
     private static int contProfesor = 0;
@@ -394,6 +394,8 @@ public class Ingresodatos {
     }
     public static void calificar(int idpersona){
         int idcarrera;
+        int idmateria;
+        int idestudiante;
         Cadena.saltolinea(2);
         System.out.println("\tCalificar Estudiantes de la Carrera de: ?");
         Cadena.saltolinea(1);
@@ -406,6 +408,114 @@ public class Ingresodatos {
         Cadena.saltolinea(1);
         System.out.print("\tIngrese item de Carrera: ");
         idcarrera = Cadena.leerentero();
+        Cadena.saltolinea(1);
+        System.out.println("\t\033[31mCALIFICAR MATERIA");
+        System.out.println("\tItem\tMATERIA");
+        for (Materia maters : materia) {
+            if (maters.getIdcarrera()==carrera.get(idcarrera-1).getIdcarrera() || maters.getIdprofesor()==profesor.get(idpersona-1).getIdpersona()) {
+                System.out.println("\t["+maters.getIdmateria()+"]\t"+maters.getNom_materia());
+            }
+        }
+        Cadena.saltolinea(1);
+        System.out.print("\tCalificar la Materia de: ");
+        idmateria = Cadena.leerentero();
+        int respuesta;
+        do {            
+          Cadena.saltolinea(1);
+        System.out.println("\t\033[31mLISTA DE ESTUDIANTES DE ESTA MATERIA:");
+        System.out.println("\tItem\tALUMNO");
+        for (Estudiante_Materia estudentmat : estud_mater) {
+            if (estudentmat.getIdmateria()==materia.get(idmateria-1).getIdmateria()) {
+                System.out.println("\t["+estudiante.get(estudentmat.getIdestudiante()-1).getIdpersona()+"]\t"+estudiante.get(estudentmat.getIdestudiante()-1).getNombre()+" "+estudiante.get(estudentmat.getIdestudiante()-1).getApellido());
+            }
+        }
+        Cadena.saltolinea(1);
+        idestudiante = Cadena.leerentero();
+        int opcion;
+        
+            do {                
+                Cadena.saltolinea(1);
+            System.out.println("\t\033[34mCalificar: ");
+            System.out.println("\t[1]. 1er Parcial");
+            System.out.println("\t[2]. 2do Parcial");
+            System.out.println("\t[3]. Recuperación");
+            System.out.println("\t[4]. Nota Final");
+            System.out.println("\t[5]. SALIR");
+            System.out.print("\tSeleccione Item: ");
+            opcion = Cadena.leerentero();
+            switch(opcion){
+                case 1: parcial1(idestudiante,idmateria);
+                    break;
+                case 2: parcial2(idestudiante,idmateria);
+                    break;
+                case 3: recuperacion(idestudiante,idmateria);
+                    break;
+                case 4: notafinal(idestudiante,idmateria);
+                    break;   
+                case 5: 
+                    break;
+                 default: error();
+            }
+            } while (opcion!=5);
+            System.out.print("\n\tDESEA SEGUIR CALIFICANDO ? [1 SI/0 NO]: ");
+            respuesta = Cadena.leerentero();
+        } while (respuesta!=0);
+        
+    }
+    public static void parcial1(int idestudiante, int idmateria){
+        Double parcial1;
+        Cadena.saltolinea(1);
+        System.out.println("\t\033[34mINGRESE NOTA: ");
+        System.out.print("\tParcial 1: ");
+        parcial1 = Cadena.leerdecimal();
+        Calificacion calif = new Calificacion(parcial1, 0.0, 0.0, 0.0, idestudiante, idmateria);
+        calificacion.add(calif);
+        System.out.println("\t\033[32mCALIFICADO CON EXITO");
+        Cadena.saltolinea(1);
+    }
+    public static int obtenerPosicion(int idestudiante, int idmateria) {
+        int pos = -1;
+        for (Calificacion ca : calificacion) {
+            pos++;
+            if (ca.getIdestudiante() == (idestudiante-1) || ca.getIdmateria() == (idmateria-1)) {
+                break;
+            }
+        }
+        return pos;
+    }
+    public static void parcial2(int idestudiante, int idmateria){
+        Double parcial2;
+        Cadena.saltolinea(1);
+        System.out.println("\t\033[34mINGRESE NOTA: ");
+        System.out.print("\tParcial 2: ");
+        parcial2 = Cadena.leerdecimal();
+        calificacion.get(obtenerPosicion(idestudiante, idmateria)).setParcial2(parcial2);
+        System.out.println("\t\033[32mCALIFICADO CON EXITO");
+        Cadena.saltolinea(1);
+    }
+    public static void recuperacion(int idestudiante, int idmateria){
+        Double recuperacion;
+        Cadena.saltolinea(1);
+        System.out.println("\t\033[34mINGRESE NOTA: ");
+        System.out.print("\tRecuperación: ");
+        recuperacion = Cadena.leerdecimal();
+        calificacion.get(obtenerPosicion(idestudiante, idmateria)).setRecupercion(recuperacion);
+        System.out.println("\t\033[32mCALIFICADO CON EXITO");
+        Cadena.saltolinea(1);
+    }
+    public static void notafinal(int idestudiante, int idmateria){
+        Double notafinal;
+        Cadena.saltolinea(1);
+        System.out.println("\t\033[34mINGRESE NOTA: ");
+        System.out.print("\tNota Final: ");
+        notafinal = Cadena.leerdecimal();
+        calificacion.get(obtenerPosicion(idestudiante, idmateria)).setNotafinal(notafinal);
+        System.out.println("\t\033[32mCALIFICADO CON EXITO");
+        Cadena.saltolinea(1);
+        System.out.println("\tParcial 1\tParcial 2\tRecuperación\tNota Final");
+        for (Calificacion cal : calificacion) {
+            System.out.println("\t"+cal.getParcial1()+" "+cal.getParcial2()+" "+cal.getRecupercion()+" "+cal.getNotafinal());
+        }
     }
     public static void verNotasEstudiante(int idpersona){
         int idcarrera=estudiante.get(idpersona-1).getIdcarrera();
@@ -429,7 +539,7 @@ public class Ingresodatos {
             int pos=0;
             for (Estudiante estu : estudiante) {
                 pos++;
-                if (estu.getCedula().contains(cedula) || estu.getPassword().contains(password)) {
+                if (estu.getCedula().equals(cedula) || estu.getPassword().equals(password)) {
                     loginCorrecto=true;
                     System.out.println(estu.getNombre()+" obtenido en la posicion: "+pos);
                     break;
@@ -447,7 +557,7 @@ public class Ingresodatos {
                 for (Profesor profes : profesor) {
                     
                    pos2++;
-                    if (profes.getCedula().contains(cedula) || profes.getPassword().contains(password)) {
+                    if (profes.getCedula().equals(cedula) || profes.getPassword().equals(password)) {
                         loginCorrecto=true;
                         System.out.println(profes.getNombre()+" obtenido en la posicion: "+pos2);
                          break;

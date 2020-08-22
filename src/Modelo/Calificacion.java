@@ -29,6 +29,9 @@ public class Calificacion{
         this.idmateria = idmateria;
     }
 
+   
+    
+
     public Double getParcial1() {
         return parcial1;
     }
