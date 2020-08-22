@@ -68,6 +68,8 @@ public class Ingresodatos {
         /////////////////////
         Profesor_Carrera proca = new Profesor_Carrera(1, 3);
         prof_carr.add(proca);
+        Profesor_Carrera proca4 = new Profesor_Carrera(1, 2);
+        prof_carr.add(proca4);
          Profesor_Carrera proca1 = new Profesor_Carrera(2, 2);
         prof_carr.add(proca1);
          Profesor_Carrera proca2 = new Profesor_Carrera(3, 1);
@@ -223,11 +225,11 @@ public class Ingresodatos {
                     System.out.println("\tNro\tEstudiante\tMateria\tCarrera\tProfesor");
                     int num=0;
                     for (Estudiante_Materia estumat : estud_mater) {
-                        if (estumat.getIdestudiante()==estudiante.get(estumat.getIdestudiante()-1).getIdpersona() /*|| estumat.getIdmateria()==materia.get(estumat.getIdmateria()-1).getIdmateria()*/) {
+                        if (estumat.getIdestudiante()==estudiante.get(contEstudiante-1).getIdpersona() /*|| estumat.getIdmateria()==materia.get(estumat.getIdmateria()-1).getIdmateria()*/) {
                             num++;
                             System.out.println("\t"+num+"\t"+estudiante.get(contEstudiante-1).getNombre()+" "+estudiante.get(contEstudiante-1).getApellido()+"\t"
-                                    +materia.get(estu_mat.getIdmateria()-1).getNom_materia()+"\t"+carrera.get(materia.get(estu_mat.getIdmateria()-1).getIdcarrera()-1).getNom_carrera()+
-                                    "\t"+profesor.get(materia.get(estu_mat.getIdmateria()-1).getIdprofesor()-1).getNombre()+" "+profesor.get(materia.get(estu_mat.getIdmateria()-1).getIdprofesor()-1).getApellido());
+                                    +materia.get(estumat.getIdmateria()-1).getNom_materia()+"\t"+carrera.get(materia.get(estumat.getIdmateria()-1).getIdcarrera()-1).getNom_carrera()+
+                                    "\t"+profesor.get(materia.get(estumat.getIdmateria()-1).getIdprofesor()-1).getNombre()+" "+profesor.get(materia.get(estumat.getIdmateria()-1).getIdprofesor()-1).getApellido());
                             //System.out.println("exite");
                         }
                            //System.out.println("\t"+num+"\t"+estudiante.get(estumat.getIdestudiante()-1).getNombre()+" "+estudiante.get(estumat.getIdestudiante()-1).getApellido()+"\t"+materia.get(estumat.getIdmateria()-1).getNom_materia());
@@ -390,15 +392,20 @@ public class Ingresodatos {
             respuesta = Cadena.leerentero();
         } while (respuesta!=0);
     }
-    public static void calificar(){
+    public static void calificar(int idpersona){
+        int idcarrera;
         Cadena.saltolinea(2);
         System.out.println("\tCalificar Estudiantes de la Carrera de: ?");
         Cadena.saltolinea(1);
+        System.out.println("\tItem\tCARRERA");
         for (Profesor_Carrera procar : prof_carr) {
-            if (procar.getIdcarrera()==carrera.get(procar.getIdcarrera()-1).getIdcarrera()) {
-                System.out.println(carrera.get(procar.getIdcarrera()-1).getIdcarrera()+" "+carrera.get(procar.getIdcarrera()-1).getNom_carrera());
+            if (procar.getIdpersona()==profesor.get(idpersona-1).getIdpersona()) {
+                System.out.println("\t["+carrera.get(procar.getIdcarrera()-1).getIdcarrera()+"]\t"+carrera.get(procar.getIdcarrera()-1).getNom_carrera());
             }
         }
+        Cadena.saltolinea(1);
+        System.out.print("\tIngrese item de Carrera: ");
+        idcarrera = Cadena.leerentero();
     }
     public static void verNotasEstudiante(int idpersona){
         int idcarrera=estudiante.get(idpersona-1).getIdcarrera();
@@ -422,7 +429,7 @@ public class Ingresodatos {
             int pos=0;
             for (Estudiante estu : estudiante) {
                 pos++;
-                if (estu.getCedula().equals(cedula) || estu.getPassword().equals(password)) {
+                if (estu.getCedula().contains(cedula) || estu.getPassword().contains(password)) {
                     loginCorrecto=true;
                     System.out.println(estu.getNombre()+" obtenido en la posicion: "+pos);
                     break;
@@ -440,7 +447,7 @@ public class Ingresodatos {
                 for (Profesor profes : profesor) {
                     
                    pos2++;
-                    if (profes.getCedula().equals(cedula) || profes.getPassword().equals(password)) {
+                    if (profes.getCedula().contains(cedula) || profes.getPassword().contains(password)) {
                         loginCorrecto=true;
                         System.out.println(profes.getNombre()+" obtenido en la posicion: "+pos2);
                          break;

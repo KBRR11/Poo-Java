@@ -83,12 +83,13 @@ public class Logica {
     }
     public static void iniciarSistemaProfesor(int idprofesor){
         int opcion;
+        System.out.println(idprofesor);
         do {            
             Ingresodatos.textoSistemaProfesor();
             opcion = Cadena.leerentero();
             Cadena.saltolinea(1);
             switch(opcion){
-                case 1: Ingresodatos.calificar();
+                case 1: Ingresodatos.calificar(idprofesor);
                     break;
                 case 2:
                     break;
