@@ -93,12 +93,14 @@ public class Logica {
                     break;
                 case 2:
                     break;
-                case 3: Cadena.saltolinea(3);
+                case 3: Ingresodatos.verNotasMateria(idprofesor);
+                    break;
+                case 4: Cadena.saltolinea(3);
                         System.out.println("\t\033[31mSESION CERRARA!!");
                         Cadena.saltolinea(3);
                     break;
         }
-        } while (opcion!=3);
+        } while (opcion!=4);
     }
     
     public static void iniciarSistemaEstudiante(int idestudiante){
@@ -110,7 +112,7 @@ public class Logica {
             opcion = Cadena.leerentero();
             Cadena.saltolinea(1);
              switch(opcion){
-                            case 1: Ingresodatos.verNotasEstudiante(idestudiante);
+                            case 1: Ingresodatos.obsNotas(idestudiante);
                                 break;
                             case 2: Cadena.saltolinea(3);
                                     System.out.println("\t\033[31mSESION CERRARA!!");
