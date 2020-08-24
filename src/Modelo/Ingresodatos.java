@@ -412,7 +412,7 @@ public class Ingresodatos {
         System.out.println("\t\033[31mCALIFICAR MATERIA");
         System.out.println("\tItem\tMATERIA");
         for (Materia maters : materia) {
-            if (maters.getIdcarrera()==carrera.get(idcarrera-1).getIdcarrera() || maters.getIdprofesor()==profesor.get(idpersona-1).getIdpersona()) {
+            if (maters.getIdcarrera()==carrera.get(idcarrera-1).getIdcarrera() && maters.getIdprofesor()==profesor.get(idpersona-1).getIdpersona()) {
                 System.out.println("\t["+maters.getIdmateria()+"]\t"+maters.getNom_materia());
             }
         }
@@ -430,37 +430,52 @@ public class Ingresodatos {
             }
         }
         Cadena.saltolinea(1);
+            System.out.print("\t Elejir Item de Estudiante: ");
         idestudiante = Cadena.leerentero();
         int opcion;
         
             do {                
                 Cadena.saltolinea(1);
-            System.out.println("\t\033[34mCalificar: ");
-            System.out.println("\t[1]. 1er Parcial");
-            System.out.println("\t[2]. 2do Parcial");
-            System.out.println("\t[3]. Recuperación");
-            System.out.println("\t[4]. Nota Final");
-            System.out.println("\t[5]. SALIR");
+            System.out.println("\t\033[34mCalificar a "+estudiante.get(idestudiante-1).getNombre()+" "+estudiante.get(idestudiante-1).getApellido());
+            System.out.println("\t[1]. Ver Notas del Estudiante");
+            System.out.println("\t[2]. 1er Parcial");
+            System.out.println("\t[3]. 2do Parcial");
+            System.out.println("\t[4]. Recuperación");
+            System.out.println("\t[5]. Nota Final");
+            System.out.println("\t[6]. SALIR");
             System.out.print("\tSeleccione Item: ");
             opcion = Cadena.leerentero();
             switch(opcion){
-                case 1: parcial1(idestudiante,idmateria);
+                case 1:verNotasEst(idestudiante, idmateria);
                     break;
-                case 2: parcial2(idestudiante,idmateria);
+                case 2: parcial1(idestudiante,idmateria);
                     break;
-                case 3: recuperacion(idestudiante,idmateria);
+                case 3: parcial2(idestudiante,idmateria);
                     break;
-                case 4: notafinal(idestudiante,idmateria);
+                case 4: recuperacion(idestudiante,idmateria);
+                    break;
+                case 5: notafinal(idestudiante,idmateria);
                     break;   
-                case 5: 
+                case 6: 
                     break;
                  default: error();
             }
-            } while (opcion!=5);
+            } while (opcion!=6);
             System.out.print("\n\tDESEA SEGUIR CALIFICANDO ? [1 SI/0 NO]: ");
             respuesta = Cadena.leerentero();
         } while (respuesta!=0);
         
+    }
+    public static void verNotasEst(int idestudiante, int idmateria){
+        Cadena.saltolinea(1);
+             System.out.println("\tParcial 1    Parcial 2    Recuperación    Nota Final");
+        for (Calificacion cal : calificacion) {
+            //System.out.println("idestudiante parametro: "+(idestudiante)+" idestudiante encontrado: "+cal.getIdestudiante()+"\nIdmateria P: "+idmateria+" Idemateria E: "+cal.getIdmateria());
+            if (cal.getIdestudiante()==estudiante.get(idestudiante-1).getIdpersona() && cal.getIdmateria()==materia.get(idmateria-1).getIdmateria()) {
+                System.out.println("\t  "+cal.getParcial1()+"         "+cal.getParcial2()+"         "+cal.getRecupercion()+"            "+cal.getNotafinal());
+                break;
+            }
+        }
     }
     public static void parcial1(int idestudiante, int idmateria){
         Double parcial1;
@@ -470,6 +485,15 @@ public class Ingresodatos {
         parcial1 = Cadena.leerdecimal();
         Calificacion calif = new Calificacion(parcial1, 0.0, 0.0, 0.0, idestudiante, idmateria);
         calificacion.add(calif);
+        Cadena.saltolinea(1);
+             System.out.println("\tParcial 1    Parcial 2    Recuperación    Nota Final");
+        for (Calificacion cal : calificacion) {
+            
+            if (cal.getIdestudiante()==estudiante.get(idestudiante-1).getIdpersona() && cal.getIdmateria()==materia.get(idmateria-1).getIdmateria()) {
+                System.out.println("\t  "+cal.getParcial1()+"         "+cal.getParcial2()+"         "+cal.getRecupercion()+"            "+cal.getNotafinal());
+            }
+        }
+        Cadena.saltolinea(1);
         System.out.println("\t\033[32mCALIFICADO CON EXITO");
         Cadena.saltolinea(1);
     }
@@ -477,7 +501,7 @@ public class Ingresodatos {
         int pos = -1;
         for (Calificacion ca : calificacion) {
             pos++;
-            if (ca.getIdestudiante() == (idestudiante-1) || ca.getIdmateria() == (idmateria-1)) {
+            if (ca.getIdestudiante() == (idestudiante-1) && ca.getIdmateria() == (idmateria-1)) {
                 break;
             }
         }
@@ -490,6 +514,15 @@ public class Ingresodatos {
         System.out.print("\tParcial 2: ");
         parcial2 = Cadena.leerdecimal();
         calificacion.get(obtenerPosicion(idestudiante, idmateria)).setParcial2(parcial2);
+        Cadena.saltolinea(1);
+             System.out.println("\tParcial 1    Parcial 2    Recuperación    Nota Final");
+        for (Calificacion cal : calificacion) {
+            
+            if (cal.getIdestudiante()==estudiante.get(idestudiante-1).getIdpersona() && cal.getIdmateria()==materia.get(idmateria-1).getIdmateria()) {
+                System.out.println("\t  "+cal.getParcial1()+"         "+cal.getParcial2()+"         "+cal.getRecupercion()+"            "+cal.getNotafinal());
+            }
+        }
+        Cadena.saltolinea(1);
         System.out.println("\t\033[32mCALIFICADO CON EXITO");
         Cadena.saltolinea(1);
     }
@@ -500,6 +533,15 @@ public class Ingresodatos {
         System.out.print("\tRecuperación: ");
         recuperacion = Cadena.leerdecimal();
         calificacion.get(obtenerPosicion(idestudiante, idmateria)).setRecupercion(recuperacion);
+        Cadena.saltolinea(1);
+             System.out.println("\tParcial 1    Parcial 2    Recuperación    Nota Final");
+        for (Calificacion cal : calificacion) {
+            
+            if (cal.getIdestudiante()==estudiante.get(idestudiante-1).getIdpersona() && cal.getIdmateria()==materia.get(idmateria-1).getIdmateria()) {
+                System.out.println("\t  "+cal.getParcial1()+"         "+cal.getParcial2()+"         "+cal.getRecupercion()+"            "+cal.getNotafinal());
+            }
+        }
+        Cadena.saltolinea(1);
         System.out.println("\t\033[32mCALIFICADO CON EXITO");
         Cadena.saltolinea(1);
     }
@@ -512,9 +554,13 @@ public class Ingresodatos {
         calificacion.get(obtenerPosicion(idestudiante, idmateria)).setNotafinal(notafinal);
         System.out.println("\t\033[32mCALIFICADO CON EXITO");
         Cadena.saltolinea(1);
-        System.out.println("\tParcial 1\tParcial 2\tRecuperación\tNota Final");
+        System.out.println("\tParcial 1    Parcial 2    Recuperación    Nota Final");
+                               
         for (Calificacion cal : calificacion) {
-            System.out.println("\t"+cal.getParcial1()+" "+cal.getParcial2()+" "+cal.getRecupercion()+" "+cal.getNotafinal());
+            if (cal.getIdestudiante()==estudiante.get(idestudiante-1).getIdpersona() && cal.getIdmateria()==materia.get(idmateria-1).getIdmateria()) {
+                System.out.println("\t  "+cal.getParcial1()+"         "+cal.getParcial2()+"         "+cal.getRecupercion()+"            "+cal.getNotafinal());
+            }
+            
         }
     }
     public static void verNotasEstudiante(int idpersona){
@@ -528,25 +574,24 @@ public class Ingresodatos {
         /*Logica.iniciarSistemaEstudiante(idpersona);*/
         }
     
-    public static void validacionLogin(String cedula, String password){
+     public static void validacionLogin(String cedula, String password){
         String userAdmin = "admin";
         String passAdmin = "admin";
         boolean loginCorrecto=false;
-        if (cedula.equals(userAdmin) || password.equals(passAdmin)) {
+        if (cedula.equals(userAdmin) && password.equals(passAdmin)) {
             
             Logica.iniciarSistemaAdmin();
         } else {
             int pos=0;
+            System.out.println("Buscando en Estudiantes");
             for (Estudiante estu : estudiante) {
-                pos++;
-                if (estu.getCedula().equals(cedula) || estu.getPassword().equals(password)) {
+               
+                pos++; 
+                if (cedula.equals(estu.getCedula()) && password.equals(estu.getPassword())) {
                     loginCorrecto=true;
-                    System.out.println(estu.getNombre()+" obtenido en la posicion: "+pos);
-                    break;
-                }else{
-                    loginCorrecto=false;
                     break;
                 }
+                
             }
             if (loginCorrecto) {
                 System.out.println(pos);
@@ -557,15 +602,11 @@ public class Ingresodatos {
                 for (Profesor profes : profesor) {
                     
                    pos2++;
-                    if (profes.getCedula().equals(cedula) || profes.getPassword().equals(password)) {
+                    if (profes.getCedula().equals(cedula) && profes.getPassword().equals(password)) {
                         loginCorrecto=true;
-                        System.out.println(profes.getNombre()+" obtenido en la posicion: "+pos2);
-                         break;
-                    }else{
-                        System.out.println("no encontrado");
-                        loginCorrecto=false;
                         break;
                     }
+                    
                 }
                 if (loginCorrecto) {
                 System.out.println(pos2);
@@ -580,11 +621,12 @@ public class Ingresodatos {
                 Login();  
                 }
             }
-            
-            
+                
+            } 
               
         }
-    }
+    
+
     
     public static void error() {
         System.out.println("\033[31m--------   -------  ERROR  -------  --------\n\tIntenta Otra vez !!");
