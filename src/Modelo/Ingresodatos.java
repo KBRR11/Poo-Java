@@ -18,12 +18,14 @@ public class Ingresodatos {
     private static ArrayList<Profesor_Carrera> prof_carr = new ArrayList();
     private static ArrayList<Estudiante> estudiante = new ArrayList();
     private static ArrayList<Profesor> profesor = new ArrayList();
+    private static ArrayList<Secretaria> secretaria = new ArrayList<>();
     private static ArrayList<Materia> materia = new ArrayList(); 
     private static ArrayList<Estudiante_Materia> estud_mater = new ArrayList();
     private static ArrayList<Calificacion> calificacion = new ArrayList<>();
     
     private static int contCarrera = 0;
     private static int contProfesor = 0;
+    private static int contSecretaria = 0;
     private static int contEstudiante = 0;
     private static int contMateria = 0;
     
@@ -336,6 +338,92 @@ public class Ingresodatos {
         
         
         
+        
+    }
+    
+    public static void registerSecretary(){
+        String nombre;
+        String apellido;
+        String cedula;
+        String edad;
+        String fecha_nacimiento;
+        String telefono;
+        String direccion;
+        String password;
+        String pass2,fecha_ingreso,service_time;
+        String turno ="";
+        String tipo="3";
+        boolean correcto=false;
+        int idcarrera,opc_turno;
+        contSecretaria++;       
+        Cadena.saltolinea(2);
+        System.out.println("\t\t\033[34mREGISTRO DE SECRETARIA");
+        Cadena.saltolinea(1);
+        System.out.print("\tNombre: ");
+        nombre = Cadena.leercadena();
+        System.out.print("\tApellido: ");
+        apellido = Cadena.leercadena();
+        System.out.print("\tCédula: ");
+        cedula = Cadena.leercadena();
+        System.out.print("\tEdad: ");
+        edad = Cadena.leercadena();
+        System.out.print("\tFecha de Nacimiento: ");
+        fecha_nacimiento = Cadena.leercadena();
+        System.out.print("\tTelefono: ");
+        telefono = Cadena.leercadena();
+        System.out.print("\tDirección: ");
+        direccion = Cadena.leercadena();
+        do {            
+          System.out.print("\tContraseña: ");
+          password = Cadena.leercadena();
+        System.out.print("\tConfirmar Contraseña: ");
+          pass2= Cadena.leercadena();
+            if (pass2.equals(password)) {
+                Cadena.saltolinea(1);
+                System.out.println("\tPertenece a la Carrera de: ");
+                Cadena.saltolinea(1);
+                System.out.println("\033[31mNro\tCARRERA");
+        for (Carrera carrera1 : carrera) {
+                System.out.println("\033[30m"+carrera1.getIdcarrera()+"\t"+carrera1.getNom_carrera());
+            }
+          System.out.print("\tSeleccionar Item de Carrera: ");
+          idcarrera = Cadena.leerentero();
+                System.out.print("\tFecha de Ingreso: ");
+                fecha_ingreso = Cadena.leercadena();
+                System.out.print("\tTiempo de Servicio: ");
+                service_time = Cadena.leercadena();
+                
+                
+                do { 
+                    System.out.print("\tTURNO: ");
+                    System.out.print("\t[1] MAÑANA: ");
+                    System.out.println("\t[2] TARDE: ");
+                    System.out.print("\tSeleccione Item: ");
+                    opc_turno = Cadena.leerentero();
+                    switch(opc_turno){
+                    case 1: turno = "Mañana";
+                    System.out.println("\t\033[32mSECRETARIA/O CREADA/O CON EXITO!!");
+                Secretaria secre1 = new Secretaria(idcarrera, fecha_ingreso, service_time, turno, contSecretaria, nombre, apellido, cedula, edad, fecha_nacimiento, telefono, direccion, password, tipo);
+                secretaria.add(secre1);
+                correcto=true;
+                        break;
+                    case 2: turno = "Tarde";
+                    System.out.println("\t\033[32mSECRETARIA/O CREADA/O CON EXITO!!");
+                Secretaria secre2 = new Secretaria(idcarrera, fecha_ingreso, service_time, turno, contSecretaria, nombre, apellido, cedula, edad, fecha_nacimiento, telefono, direccion, password, tipo);
+                secretaria.add(secre2);
+                correcto=true;
+                          break;
+                      default: error();
+                }        
+                        } while (opc_turno!=1 || opc_turno!=2);
+                
+                Cadena.saltolinea(1);
+            }else{
+                Cadena.saltolinea(1);
+                System.out.println("\t\033[31mlas contraseñas no coinciden!!\n\t\033[31mINTENTALO DE NUEVO!!");
+                Cadena.saltolinea(1);
+            }
+        } while (correcto!=true);
         
     }
     public static void registerMateria(){

@@ -5,7 +5,7 @@
             <url>src/Modelo/Logica.java</url>
             <bookmark id="1">
                 <name/>
-                <line>112</line>
+                <line>114</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,7 +14,9 @@
         <group>
             <file>file:/C:/Users/anato/OneDrive/Documents/NetBeansProjects/UG_proyect_AcostaJosue/src/Modelo/Logica.java</file>
             <file>file:/C:/Users/anato/OneDrive/Documents/NetBeansProjects/UG_proyect_AcostaJosue/src/Modelo/Ingresodatos.java</file>
+            <file>file:/C:/Users/anato/OneDrive/Documents/NetBeansProjects/UG_proyect_AcostaJosue/src/Modelo/Profesor.java</file>
             <file>file:/C:/Users/anato/OneDrive/Documents/NetBeansProjects/UG_proyect_AcostaJosue/src/Vista/SistemaUG.java</file>
+            <file>file:/C:/Users/anato/OneDrive/Documents/NetBeansProjects/UG_proyect_AcostaJosue/src/Modelo/Estudiante.java</file>
             <file>file:/C:/Users/anato/OneDrive/Documents/NetBeansProjects/UG_proyect_AcostaJosue/src/Modelo/Calificacion.java</file>
         </group>
     </open-files>

@@ -34,7 +34,7 @@ public class Logica {
                                 break;
                             case 2:// Ingresodatos.registerTeacher();
                                 break;
-                            case 3: //Ingresodatos.registerSecretary();
+                            case 3: Ingresodatos.registerSecretary();
                                 break;
                             case 4: //Ingresodatos.registerJanitor();
                                 break;   
@@ -68,7 +68,7 @@ public class Logica {
                                 break;
                             case 4: Ingresodatos.registerEstudent();
                                 break; 
-                            case 5: // Ingresodatos.registerSecretary();
+                            case 5:  Ingresodatos.registerSecretary();
                                 break;
                             case 6: //Ingresodatos.registerJanitor();
                                 case 7:
@@ -122,5 +122,7 @@ public class Logica {
                         }
         } while (opcion!=2);
     }
-    
+     public static void iniciarSistemaSecretary(int Secretaria){
+         
+     }
 }
